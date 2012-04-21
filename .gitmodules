@@ -1,0 +1,3 @@
+[submodule "vendor/cloudmine"]
+	path = vendor/cloudmine
+	url = git://gist.github.com/1577285.git

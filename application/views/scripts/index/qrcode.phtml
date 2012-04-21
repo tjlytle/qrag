@@ -1,0 +1,13 @@
+<?php 
+/* @var $game Qrag_Model_Game */
+$game = $this->game;
+$number = '13038008301';
+$size = '300x300';
+?>
+
+<?php foreach($game->getPlayers() as $player): ?>
+<div>
+    <?php echo $player->getName()?>
+    <img src='http://chart.apis.google.com/chart?cht=qr&chs=<?php echo $size?>&chl=smsto%3A<?php echo $number?>%3A<?php echo $game->getCode($player)?>' />
+</div>
+<?php endforeach;?>
