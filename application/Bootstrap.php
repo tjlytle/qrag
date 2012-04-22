@@ -18,5 +18,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set('game', $game);
         return $game;
     }
+
+    protected function _initNexmo()
+    {
+        require_once 'NexmoAccount.php';
+        require_once 'NexmoMessage.php';
+
+        $config = $this->getOption('nexmo');
+        Zend_Registry::set('nexmo', $config);
+        return $config;
+    }
+    
+	protected function _initPubnub()
+	{
+	    $config = $this->getOption('pubnub');
+	    require_once 'Pubnub.php';
+	    $pubnub = new Pubnub($config['pub'], $config['sub'], $config['secret']);
+	    Zend_Registry::set('pubnub', $pubnub);
+	    return $pubnub;
+	}    
 }
 

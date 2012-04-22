@@ -1,3 +1,9 @@
 [submodule "vendor/cloudmine"]
 	path = vendor/cloudmine
 	url = git://gist.github.com/1577285.git
+[submodule "vendor/nexmo"]
+	path = vendor/nexmo
+	url = git@github.com:Nexmo/nexmo-php-prawnsalad.git
+[submodule "vendor/pubnub"]
+	path = vendor/pubnub
+	url = https://github.com/pubnub/pubnub-api.git

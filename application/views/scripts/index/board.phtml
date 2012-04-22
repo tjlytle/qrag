@@ -1,4 +1,27 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Index</b> and script/action name <b>board</b></p>
-</div>
+<?php 
+/* @var $game Qrag_Model_Game */
+$game = $this->game;
+?>
+
+<ul id='feed'>
+
+</ul>
+
+<div sub-key="sub-1d4f0473-07b4-11e0-8edf-7baea4fe3b8b" ssl="off" origin="pubsub.pubnub.com" id="pubnub"></div>
+<script src="http://cdn.pubnub.com/pubnub-3.1.min.js"></script>
+<script type="text/javascript">
+PUBNUB.subscribe({
+    channel    : "qrag-<?php echo $game->getId()?>" ,
+    restore    : false,
+    callback   : function(message) {
+        console.log(message);
+        if("kill" == message.type){
+        	var feed = PUBNUB.$('feed');
+            feed.innerHTML = feed.innerHTML + '<li>' + message.killer.name + ' just killed ' + message.victim.name + '</li>';
+        }
+    },
+    disconnect : function() {},
+    reconnect  : function() {},
+    connect    : function() {}
+});
+</script>

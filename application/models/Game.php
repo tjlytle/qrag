@@ -7,9 +7,8 @@ class Qrag_Model_Game
     protected $id;
     protected $players = array();
     protected $status = self::STATUS_ACTIVE;
-    protected $kills = array();
     
-    public function __construct($status = self::STATUS_ACTIVE, $players = array(), $kills = array(), $id = null)
+    public function __construct($status = self::STATUS_ACTIVE, $players = array(), $id = null)
     {
         if(is_null($id)){
             $id = uniqid();
@@ -18,7 +17,6 @@ class Qrag_Model_Game
         $this->id = $id;
         $this->status = $status;
         $this->players = $players;
-        $this->kills = $kills;
     }
     
     public function getId()
@@ -28,7 +26,7 @@ class Qrag_Model_Game
     
     public function getCode($player)
     {
-        return $this->getId() . '-' . $player->getId();
+        return $this->getId() . '.' . $player->getId();
     }
     
     public function addPlayer(Qrag_Model_Player $player)
@@ -36,16 +34,21 @@ class Qrag_Model_Game
         $this->players[$player->getId()] = $player;
     }
     
-    public function kill($player, $killer)
-    {
-        $this->kills[$player->getId()] = $killer->getId();
-        $player->kill();
-    }
-    
     public function getPlayerByNumber($number)
     {
-        if(isset($this->players[$number])){
-            return $this->players[$number];
+        foreach($this->players as $player){
+            if($player->getNumber() == $number){
+                return $player;
+            }
+        }
+    }
+    
+    public function getPlayerById($id)
+    {
+        foreach($this->players as $player){
+            if($player->getId() == $id){
+                return $player;
+            }
         }
     }
     
@@ -69,7 +72,6 @@ class Qrag_Model_Game
         return array(
             'status' => $this->status,
             'players' => $players,
-            'kills' => $this->kills
         );
     }
 }

@@ -40,10 +40,10 @@ class Qrag_Service_Game
         $players = array();
         foreach($playerdata as $playerid => $player){
             $playerid = str_replace('player-', '', $playerid);
-            $players[] = new Qrag_Model_Player($player['number'], $player['name'], $player['team'], $player['status'], $playerid);
+            $players[] = new Qrag_Model_Player($player['number'], $player['name'], $player['team'], $player['status'], $player['kills'], $playerid);
         }
         
-        $game = new Qrag_Model_Game($data['status'], $players, $data['kills'], $id);
+        $game = new Qrag_Model_Game($data['status'], $players, $id);
         
         return $game;
     }

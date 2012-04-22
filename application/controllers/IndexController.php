@@ -33,6 +33,7 @@ class IndexController extends Zend_Controller_Action
                     $game->addPlayer($player);
                 }
             }
+
             
             //save some data
             $this->service->storeGame($game);
@@ -49,10 +50,29 @@ class IndexController extends Zend_Controller_Action
         $this->view->game = $game;
     }
 
+	public function aboutAction()
+	{
+	}
+	
+	
+	public function rulesAction()
+	{
+	}
+	
+	public function upgradeAction()
+	{
+	}
     public function boardAction()
     {
         // action body
+        $game = $this->service->getGameById($this->_getParam('id'));
+        $this->view->game = $game;
     }
+	
+	public function newgameAction()
+	{
+	
+	}
 
 
 }
